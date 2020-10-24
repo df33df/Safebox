@@ -1,28 +1,42 @@
 #include "ncurses.h"
-#include "string.h" 
+#include "string.h"
+int authenticate(char userName[], char password[]);
+void free(void *ptr);
 int main(void) {	
 	WINDOW *boite;
+	char userName[100] = "username";
+	char password[100] = "password";
+    	initscr();
+	authenticate(userName,password);
+	printw("appuyer sur une touche pour quitter");
+	getch();
+    	endwin();
+
+	free(boite);
+}
+int authenticate(char userName[], char password[]){
+	char currentUserName[100];
+	int len = 0;
+	char c[len];
 	int end = 1;
 	int maxTry = 3;
 	int attempts = 1;
-	int len = 0;
-	char userName[100] = "username";
-	char password[100] = "password";
-	char currentUserName[100];
-	char c[len];
-    	initscr();
 	while(end) {
 		printw("entrer votre username : ");
-		getstr(currentUserName);
+		getnstr(currentUserName, 99);
 		if(strcmp(currentUserName,userName)==0){
         		printw("username valide\n");
 			while(attempts <= maxTry) {
 				char currentPassword[100] = "";
+				int i = 0;
 				printw("entrer votre password : ");
 				noecho();
 				while((*c = getch()) != 10){
 					addch('*');
-					strcat(currentPassword, c);
+					i++;
+					if (i < 100){
+						strcat(currentPassword, c);
+					}
 					len--;	
 					refresh();	
 				}
@@ -43,12 +57,7 @@ int main(void) {
 			printw("username invalide\n");
 		}
     	}
-	printw("appuyer sur une touche pour quitter");
-	getch();
-    	endwin();
-
-	free(boite);
-    
 	return 0;
 }
 /* compilation avec clang : clang -lncurses test_saisie.c */
+
