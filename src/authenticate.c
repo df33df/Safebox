@@ -1,19 +1,7 @@
-#include "ncurses.h"
-#include "string.h"
-int authenticate(char userName[], char password[]);
-void free(void *ptr);
-int main(void) {	
-	WINDOW *boite;
-	char userName[100] = "username";
-	char password[100] = "password";
-    	initscr();
-	authenticate(userName,password);
-	printw("appuyer sur une touche pour quitter");
-	getch();
-    	endwin();
+#include <ncurses.h>
+#include <string.h>
+#include "authenticate.h"
 
-	free(boite);
-}
 int authenticate(char userName[], char password[]){
 	char currentUserName[100];
 	int len = 0;
@@ -59,5 +47,3 @@ int authenticate(char userName[], char password[]){
     	}
 	return 0;
 }
-/* compilation avec clang : clang -lncurses test_saisie.c */
-
