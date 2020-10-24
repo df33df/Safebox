@@ -1,0 +1,2 @@
+[authenticate.c:28]: (style) Variable 'len' is modified but its 1/2 files checked 71% don[main.c:9]: (style) Variable 'boite' is not assigned a val2/2 files checked 100% done
+nitialized variable: boite
